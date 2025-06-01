@@ -49,7 +49,7 @@ export default function HomeNavbar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{backgroundColor: "#476ECB"}}>
+      <AppBar component="nav" sx={{backgroundColor: "#202157"}}>
         <Toolbar
           sx={{
             position: "relative",

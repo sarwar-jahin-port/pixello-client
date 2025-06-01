@@ -29,14 +29,14 @@ const MainFeatures = () => {
             >
               MAIN FEATURES
             </Typography>
-            <Typography variant="h2" sx={{fontSize: {xs:"2rem", sm:"2.5rem", md:"3rem", lg:"3.5rem"}}}>Empower Your Brand</Typography>
-            <Typography variant="h2" sx={{fontSize: {xs:"2rem", sm:"2.5rem", md:"3rem", lg:"3.5rem"}}}>Pixello</Typography>
+            <Typography variant="h2" sx={{fontSize: {xs:"2rem", sm:"2.5rem", md:"3rem"}}}>Empower Your Brand</Typography>
+            <Typography variant="h2" sx={{fontSize: {xs:"2rem", sm:"2.5rem", md:"3rem"}}}>Pixello</Typography>
           </Box>
 
           <Box sx={{ mb: [2, 5] }}>
             <Typography variant="body1">
               <Box component="span" sx={{ fontSize: '2.5rem' }}>01</Box>
-              /03
+              /04
             </Typography>
             <Box sx={{ width: '100%', mt: 2 }}>
               <Typography variant="h5" gutterBottom>Exclusive Professional Network:</Typography>
@@ -44,6 +44,24 @@ const MainFeatures = () => {
                  Connect with verified professionals from diverse industries, expanding your reach and opening doors to new collaborations. Pixello provides a curated environment where quality interactions are prioritized, ensuring you spend less time sifting through noise and more time engaging with relevant peers, mentors, and potential partners.
               </Typography>
             </Box>
+            {/* <Box sx={{ width: '100%', mt: 2 }}>
+              <Typography variant="h5" gutterBottom>Seamless Corporate Communication & Collaboration:</Typography>
+              <Typography variant="body1" textAlign="justify">
+                 Facilitate secure and efficient corporate discussions directly on the platform. Our intuitive tools allow for private group chats, project-specific channels, and easy document sharing, streamlining your internal and external business communications. From team meetings to client negotiations, Pixello ensures your corporate talks are productive, organized, and confidential, all within one integrated space.
+              </Typography>
+            </Box>
+            <Box sx={{ width: '100%', mt: 2 }}>
+              <Typography variant="h5" gutterBottom>Deal Closing & Opportunity Hub:</Typography>
+              <Typography variant="body1" textAlign="justify">
+                 Beyond networking, Pixello empowers you to turn connections into tangible outcomes. Discover new business leads, pitch ideas, and close deals through dedicated features designed to support your sales cycle. Our platform acts as a dynamic marketplace where opportunities are easily identified, negotiations are simplified, and partnerships are forged, accelerating your business development efforts.
+              </Typography>
+            </Box>
+            <Box sx={{ width: '100%', mt: 2 }}>
+              <Typography variant="h5" gutterBottom>Unrestricted Professional Networking:</Typography>
+              <Typography variant="body1" textAlign="justify">
+                 Enjoy the freedom of building valuable connections without hidden fees or premium paywalls for core networking features. Pixello believes in fostering a truly open professional ecosystem where everyone has equal access to grow their network, share insights, and discover opportunities. Expand your horizons and connect with the right people to propel your career or business forward, completely free.
+              </Typography>
+            </Box> */}
           </Box>
         </Grid>
 
@@ -90,7 +108,7 @@ const MainFeatures = () => {
                   alignItems: 'center', 
                   gap: 3,
                 }}>
-                  <Box sx={{backgroundColor: 'primary.main', borderRadius: '50%', padding: 1}}><NotesIcon fontSize="large" /></Box>
+                  <Box sx={{backgroundColor: '#b0d6fc', borderRadius: '50%', padding: 1}}><NotesIcon fontSize="large" /></Box>
                   <Box>
                     <Typography variant="h6">{line1}</Typography>
                     <Typography variant="h6">{line2}</Typography>
