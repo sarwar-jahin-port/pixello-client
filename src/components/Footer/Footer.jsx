@@ -214,7 +214,7 @@ const Footer = () => {
             variant="body2"
             sx={{ color: "rgba(255, 255, 255, 0.5)" }}
           >
-            Copyright© 2023 Roblox Solutions LLC
+            Copyright© 2025 Pixello solutions LLC
           </Typography>
         </Box>
       </Container>
