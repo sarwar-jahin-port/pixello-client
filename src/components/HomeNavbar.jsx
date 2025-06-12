@@ -13,9 +13,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Pricing", "Blogs", "Create an account"];
+const navItems = [
+  { label: "Home", path: "/" },
+  { label: "Pricing", path: "/pricing" },
+  { label: "Blogs", path: "/blogs" },
+  { label: "Create an account", path: "/signup" },
+];
 
 export default function HomeNavbar(props) {
   const { window } = props;
@@ -32,10 +38,10 @@ export default function HomeNavbar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        {navItems.map(({label}) => (
+          <ListItem key={label} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={label} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -45,6 +51,8 @@ export default function HomeNavbar(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -82,19 +90,20 @@ export default function HomeNavbar(props) {
           </Typography>
           <Box>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
+              {navItems.map(({label, path, index}) => (
                 <Button
-                  key={item}
+                  key={index}
                   sx={{
                     color: "#fff",
                     marginRight: 5,
                     fontSize: "1rem",
-                    ...(item === "Create an account" && {
+                    ...(label === "Create an account" && {
                       border: "1px solid currentColor",
                     }),
                   }}
+                  onClick={() => navigate(path)}
                 >
-                  {item}
+                  {label}
                 </Button>
               ))}
             </Box>
