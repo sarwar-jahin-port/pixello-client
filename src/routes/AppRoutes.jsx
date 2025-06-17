@@ -9,6 +9,7 @@ import ResetPassword from '../pages/ResetPassword'
 import Dashboard from '../pages/Dashboard'
 import UserLayout from '../layouts/UserLayout'
 import Pricing from '../pages/Pricing'
+import Profile from '../pages/Profile'
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         } 
       >
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   )
