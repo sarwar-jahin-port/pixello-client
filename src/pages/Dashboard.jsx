@@ -9,6 +9,7 @@ import MessagesWidget from "../components/MessagesWidget";
 import { postService } from "../services/api";
 import LoadingScreen from "../components/LoadingScreen";
 import { AuthContext } from "../contexts/AuthContext";
+import { Skeleton } from "@mui/material";
 
 const Dashboard = () => {
   const { user, logout, loading } = useContext(AuthContext);
@@ -44,11 +45,15 @@ const Dashboard = () => {
     fetchPosts();
   }, [page]);
 
-  const handlePostSubmit = async(postData) => {
+  const handlePostSubmit = async (postData) => {
     console.log(postData);
     if (postData.id) {
       // Update existing post
-      const editPost = await postService.editPost(postData.id, postData.content, postData.videoUrl);
+      const editPost = await postService.editPost(
+        postData.id,
+        postData.content,
+        postData.videoUrl
+      );
       setPosts(
         posts.map((post) =>
           post.id === postData.id
@@ -65,7 +70,10 @@ const Dashboard = () => {
     } else {
       // Create new post
 
-      const newPost = await postService.createPost(postData.content, postData.videoUrl)
+      const newPost = await postService.createPost(
+        postData.content,
+        postData.videoUrl
+      );
 
       // const newPost = {
       //   id: Date.now(),
@@ -93,7 +101,7 @@ const Dashboard = () => {
     setEditingPost(post);
   };
 
-  const handlePostDelete = async(postId) => {
+  const handlePostDelete = async (postId) => {
     try {
       const deletePost = await postService.deletePost(postId);
       console.log(deletePost);
@@ -138,23 +146,40 @@ const Dashboard = () => {
               backgroundColor: theme.palette.background.default,
             }}
           >
-            <CreatePost editPost={editingPost}
-            onSubmit={handlePostSubmit}
-            onCancel={() => setEditingPost(null)}/>
+            <CreatePost
+              editPost={editingPost}
+              onSubmit={handlePostSubmit}
+              onCancel={() => setEditingPost(null)}
+            />
           </Box>
 
           <Box>
-            {posts?.map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-              >
-                <PostCard post={post} onEdit={handlePostEdit}
-                  onDelete={handlePostDelete}/>
-              </motion.div>
-            ))}
+            {postsloading
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <Box key={i} mb={2}>
+                    <Skeleton
+                      variant="rectangular"
+                      height={140}
+                      sx={{ borderRadius: 2 }}
+                    />
+                    <Skeleton width="60%" sx={{ mt: 1 }} />
+                    <Skeleton width="40%" />
+                  </Box>
+                ))
+              : posts?.map((post, index) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                  >
+                    <PostCard
+                      post={post}
+                      onEdit={handlePostEdit}
+                      onDelete={handlePostDelete}
+                    />
+                  </motion.div>
+                ))}
           </Box>
         </Grid>
 
