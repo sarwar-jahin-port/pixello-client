@@ -220,7 +220,7 @@ const PostCard = ({ post, onEdit, onDelete }) => {
     const match = url.match(regExp);
     return match ? match[1] : null;
   };
-
+  console.log(user);
   return (
     <Card
       component={motion.div}

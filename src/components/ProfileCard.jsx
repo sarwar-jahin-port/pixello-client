@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
   Box, 
   Card, 
@@ -14,6 +14,9 @@ import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import { Camera, Edit, Plus } from 'lucide-react';
 import { currentUser } from '../data/mockData';
+import { useNavigate } from 'react-router';
+import { AuthContext } from '../contexts/AuthContext';
+import GppGoodIcon from '@mui/icons-material/GppGood';
 
 const ProfileCover = styled(Box)(({ theme }) => ({
   height: 72,
@@ -59,6 +62,9 @@ const ProfileCard = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isMedium = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
+  const navigate = useNavigate();
+  const {user} = useContext(AuthContext);
+
   return (
     <Card 
       component={motion.div}
@@ -102,6 +108,7 @@ const ProfileCard = () => {
               color="primary"
               startIcon={<Edit size={16} />}
               size="small"
+              onClick = {() => navigate(`/profile`)}
             >
               Edit
             </Button>
@@ -110,15 +117,19 @@ const ProfileCard = () => {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
           <Box>
             <Typography variant="h6" fontWeight={600}>
-              {currentUser.name}
+              {user ? `${user.first_name} ${user.last_name}`.trim() : "Unnamed User"}
+              {user?.premium && <GppGoodIcon sx={{color: "#1872CE"}}/>}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
               {currentUser.headline}
             </Typography>
-            <PremiumBadge>
+            {!user?.premium && <PremiumBadge
+              onClick={() => navigate('/pricing')}
+              style={{ cursor: 'pointer' }}
+            >
               <Plus size={14} style={{ marginRight: 4 }} />
               Premium Member
-            </PremiumBadge>
+            </PremiumBadge>}
           </Box>
         </Box>
         

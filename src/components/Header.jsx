@@ -35,6 +35,8 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { currentUser, notifications } from "../data/mockData";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -109,6 +111,8 @@ const Header = () => {
   const [notificationsAnchor, setNotificationsAnchor] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const {logout} = useAuth();
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -120,6 +124,11 @@ const Header = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () =>{
+    logout();
+    setAnchorEl(null);
+  }
 
   const handleNotificationsClose = () => {
     setNotificationsAnchor(null);
@@ -163,7 +172,7 @@ const Header = () => {
         My Account
       </MenuItem>
       <Divider />
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <LogOutIcon size={18} />
         </ListItemIcon>
@@ -262,7 +271,7 @@ const Header = () => {
           borderBottom: `1px solid ${theme.palette.divider}`,
         }}
       >
-        <LogoText variant="h6">Pixello</LogoText>
+        <LogoText variant="h6" >Pixello</LogoText>
         <IconButton onClick={toggleMobileMenu}>
           <CloseIcon size={20} />
         </IconButton>
@@ -334,6 +343,8 @@ const Header = () => {
     </Drawer>
   );
 
+  const navigate = useNavigate();
+
   return (
     <>
       <AppBar
@@ -356,7 +367,9 @@ const Header = () => {
                 display: "flex",
                 alignItems: "center",
                 flexGrow: { xs: 1, md: 0 },
+                cursor: "pointer"
               }}
+              onClick={()=>navigate("/dashboard")}
             >
               <LogoText variant="h5" noWrap>
                 Pixello
