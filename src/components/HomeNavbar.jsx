@@ -13,13 +13,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const drawerWidth = 240;
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Pricing", path: "/pricing" },
-  { label: "Blogs", path: "/blogs" },
+  { label: "About us", path: "/about-us" },
   { label: "Create an account", path: "/signup" },
 ];
 
@@ -34,7 +34,7 @@ export default function HomeNavbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        PIXELLO
       </Typography>
       <Divider />
       <List>
@@ -86,13 +86,13 @@ export default function HomeNavbar(props) {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            PIXELLO
+            <Link to="/">PIXELLO</Link>
           </Typography>
           <Box>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map(({label, path, index}) => (
                 <Button
-                  key={index}
+                  key={label}
                   sx={{
                     color: "#fff",
                     marginRight: 5,

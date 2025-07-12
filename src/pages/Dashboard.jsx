@@ -115,12 +115,12 @@ const Dashboard = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 3, mb: 8, position: "relative" }}>
+    <Container maxWidth="lg" sx={{ mb: 8, position: "relative" }}>
       <Grid container spacing={3}>
         {/* Left column */}
         {!isMobile && (
           <Grid size={{ xs: 12, md: 3 }}>
-            <Box sx={{ position: "sticky", top: 24 }}>
+            <Box sx={{ position: "sticky", top: 63, }}>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -135,12 +135,19 @@ const Dashboard = () => {
 
         {/* Main feed */}
         <Grid size={{ xs: 12, md: 6 }}>
-          {isMobile && <ProfileCard />}
+          {/* {isMobile && <ProfileCard />} */}
 
           <Box
             sx={{
-              position: "sticky",
-              top: 24,
+              position: "fixed",
+              top: {
+                xs: 56,
+                md: 63
+              },
+              width: {
+                xs: "382px",
+                md: "566px"
+              },
               zIndex: 1,
               mb: 2,
               backgroundColor: theme.palette.background.default,
@@ -153,7 +160,7 @@ const Dashboard = () => {
             />
           </Box>
 
-          <Box>
+          <Box sx={{mt: 24}}>
             {postsloading
               ? Array.from({ length: 3 }).map((_, i) => (
                   <Box key={i} mb={2}>
@@ -186,7 +193,7 @@ const Dashboard = () => {
         {/* Right column */}
         {!isMobile && (
           <Grid size={{ xs: 12, md: 3 }}>
-            <Box sx={{ position: "sticky", top: 24 }}>
+            <Box sx={{ position: "sticky", top: 63 }}>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -200,7 +207,7 @@ const Dashboard = () => {
       </Grid>
 
       {/* Floating Messages Widget */}
-      {!isMobile && <MessagesWidget />}
+      {/* {!isMobile && <MessagesWidget />} */}
     </Container>
   );
 };

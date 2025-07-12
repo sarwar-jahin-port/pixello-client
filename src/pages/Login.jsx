@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -15,8 +15,10 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { authService } from '../services/api';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Login = () => {
+  const {user, login} = useContext(AuthContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +43,7 @@ const Login = () => {
     setLoading(true);
     
     try {
-      await authService.login(username, password);
+      await login(username, password);
       navigate('/dashboard');
     } catch (err) {
       console.error('Login error:', err);

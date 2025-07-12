@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { 
   Box, 
   Card, 
@@ -8,7 +8,8 @@ import {
   Button, 
   Divider, 
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Skeleton
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
@@ -63,7 +64,13 @@ const ProfileCard = () => {
   const isMedium = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const navigate = useNavigate();
-  const {user} = useContext(AuthContext);
+  const {user, loading} = useContext(AuthContext);
+  console.log(user, loading);
+  const displayName = [user?.first_name, user?.last_name].filter(Boolean).join(" ").trim() || "Unnamed User"
+
+  if (loading) {
+    return <Skeleton width={150} height={24} />;  // or `null`
+  }
 
   return (
     <Card 
@@ -117,7 +124,7 @@ const ProfileCard = () => {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
           <Box>
             <Typography variant="h6" fontWeight={600}>
-              {user ? `${user.first_name} ${user.last_name}`.trim() : "Unnamed User"}
+              {displayName}
               {user?.premium && <GppGoodIcon sx={{color: "#1872CE"}}/>}
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>

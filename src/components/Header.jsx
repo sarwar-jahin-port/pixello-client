@@ -36,7 +36,7 @@ import {
 import { motion } from "framer-motion";
 import { currentUser, notifications } from "../data/mockData";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -125,6 +125,11 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const handleMyAccount = () =>{
+    navigate('/profile')
+    setAnchorEl(null);
+  }
+
   const handleLogout = () =>{
     logout();
     setAnchorEl(null);
@@ -159,13 +164,13 @@ const Header = () => {
         },
       }}
     >
-      <MenuItem onClick={handleMenuClose}>
+      {/* <MenuItem onClick={handleMenuClose}>
         <ListItemIcon>
           <UserIcon size={18} />
         </ListItemIcon>
         Profile
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      </MenuItem> */}
+      <MenuItem onClick={handleMyAccount}>
         <ListItemIcon>
           <BriefcaseIcon size={18} />
         </ListItemIcon>
@@ -294,19 +299,19 @@ const Header = () => {
       </Box>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button component={Link} to="/dashboard">
           <ListItemIcon>
-            <HomeIcon size={20} />
+            <HomeIcon size={24} />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/connections">
           <ListItemIcon>
             <UsersIcon size={20} />
           </ListItemIcon>
           <ListItemText primary="My Network" />
         </ListItem>
-        <ListItem button>
+        {/* <ListItem button>
           <ListItemIcon>
             <BriefcaseIcon size={20} />
           </ListItemIcon>
@@ -323,11 +328,11 @@ const Header = () => {
             <BellIcon size={20} />
           </ListItemIcon>
           <ListItemText primary="Notifications" />
-        </ListItem>
+        </ListItem> */}
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button onClick={handleMyAccount}>
           <ListItemIcon>
             <UserIcon size={20} />
           </ListItemIcon>
@@ -407,10 +412,10 @@ const Header = () => {
             >
               {!isMobile ? (
                 <>
-                  <NavButton aria-label="home">
+                  <NavButton aria-label="home" component={Link} to="/dashboard" active={location.pathname === '/dashboard' ? 1 : 0}>
                     <HomeIcon size={24} />
                   </NavButton>
-                  <NavButton aria-label="my network">
+                  <NavButton aria-label="my network" component={Link} to="/connections" active={location.pathname === '/connections' ? 1 : 0}>
                     <UsersIcon size={24} />
                   </NavButton>
                   <NavButton aria-label="jobs">
@@ -419,7 +424,7 @@ const Header = () => {
                   <NavButton aria-label="messages">
                     <MessageIcon size={24} />
                   </NavButton>
-                  <NavButton
+                  {/* <NavButton
                     aria-label="notifications"
                     onClick={handleNotificationsOpen}
                   >
@@ -429,7 +434,7 @@ const Header = () => {
                     >
                       <BellIcon size={24} />
                     </StyledBadge>
-                  </NavButton>
+                  </NavButton> */}
                   <IconButton
                     edge="end"
                     aria-label="account of current user"
@@ -446,7 +451,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <NavButton
+                  {/* <NavButton
                     aria-label="notifications"
                     onClick={handleNotificationsOpen}
                     sx={{ mr: 1 }}
@@ -457,7 +462,7 @@ const Header = () => {
                     >
                       <BellIcon size={24} />
                     </StyledBadge>
-                  </NavButton>
+                  </NavButton> */}
                   <IconButton
                     edge="end"
                     color="inherit"
@@ -474,7 +479,7 @@ const Header = () => {
       </AppBar>
 
       {renderMenu}
-      {notificationsMenu}
+      {/* {notificationsMenu} */}
       {mobileMenu}
 
       {/* Spacer for fixed AppBar */}

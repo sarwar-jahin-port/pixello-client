@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import FooterLink from "./FooterLink";
 import SocialButton from "./SocialButton";
+import { Link } from "react-router";
 
 const Footer = () => {
   const theme = useTheme();
@@ -42,10 +43,10 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="lg">
-        {/* Top Section with Email Subscription */}
+        {/* Top Section */}
         <Box
           sx={{
-            mb: 6,
+            mb: 2,
             display: "flex",
             flexDirection: isMobile ? "column" : "row",
             justifyContent: "space-between",
@@ -69,59 +70,11 @@ const Footer = () => {
               Best Pixello Autopilot
             </Typography>
           </Box>
-
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-              display: "flex",
-              width: isMobile ? "100%" : "auto",
-              maxWidth: "400px",
-            }}
-          >
-            <TextField
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              variant="outlined"
-              fullWidth
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  bgcolor: "rgba(255, 255, 255, 0.05)",
-                  borderRadius: "4px",
-                  color: "white",
-                  "& fieldset": {
-                    borderColor: "white",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "white",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "white",
-                  },
-                },
-              }}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                bgcolor: "#10B981",
-                "&:hover": {
-                  bgcolor: "#0E9F6E",
-                },
-                ml: 1,
-                px: 3,
-              }}
-            >
-              Submit
-            </Button>
-          </Box>
         </Box>
 
         {/* Main Footer Content */}
         <Grid container spacing={4}>
-          {/* Logo and Contact Section */}
+          {/* Logo Section */}
           <Grid item size={{ xs: 12, sm: 6, md: 3 }}>
             <Typography
               variant="h5"
@@ -133,7 +86,7 @@ const Footer = () => {
                 },
               }}
             >
-              PIXELLO
+              <Link to="/">PIXELLO</Link>
             </Typography>
 
             <Typography
@@ -165,45 +118,29 @@ const Footer = () => {
 
           {/* Quick Menu Section */}
           <Grid item size={{ xs: 12, sm: 6, md: 3 }}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Quick Menu
-            </Typography>
-            <FooterLink href="#">Home</FooterLink>
-            <FooterLink href="#">Pricing</FooterLink>
-            <FooterLink href="#">Affiliate</FooterLink>
-            <FooterLink href="#">Features</FooterLink>
-            <FooterLink href="#">Blog</FooterLink>
           </Grid>
 
           {/* Compare Section */}
           <Grid item size={{ xs: 12, sm: 6, md: 3 }}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Compare
-            </Typography>
-            <FooterLink href="#">Buffer Alternative</FooterLink>
-            <FooterLink href="#">Hootsuite Alternative</FooterLink>
-            <FooterLink href="#">Later ANErative</FooterLink>
-            <FooterLink href="#">Sprout Alternative</FooterLink>
-            <FooterLink href="#">Others</FooterLink>
           </Grid>
 
           {/* Legal Section */}
-          <Grid item size={{ xs: 12, sm: 6, md: 3 }}>
+          <Grid item size={{ xs: 12, sm: 6, md: 3 }}>            
             <Typography variant="h6" sx={{ mb: 2 }}>
-              Legal
+              Quick Menu
             </Typography>
-            <FooterLink href="#">Terms & Conditions</FooterLink>
-            <FooterLink href="#">Privacy Policy</FooterLink>
-            <FooterLink href="#">Help Center</FooterLink>
-            <FooterLink href="#">Support</FooterLink>
-            <FooterLink href="#">FAQ</FooterLink>
+            <FooterLink href="/">Home</FooterLink>
+            <FooterLink href="/pricing">Pricing</FooterLink>
+            <FooterLink href="/about-us">About us</FooterLink>
+            <FooterLink href="/signup">Create an account</FooterLink>
+            <FooterLink href="/login">Login</FooterLink>
           </Grid>
         </Grid>
 
         {/* Copyright */}
         <Box
           sx={{
-            mt: 6,
+            mt: 3,
             pt: 2,
             borderTop: 1,
             borderColor: "rgba(255, 255, 255, 0.1)",

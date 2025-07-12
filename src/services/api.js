@@ -284,4 +284,49 @@ export const paymentService = {
   },
 };
 
+export const connectionService = {
+  randomUsers: async() =>{
+    try {
+      const response = await api.get('/users/show_random_users');
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
+  sendFriendRequest: async (userId) => {
+    try {
+      const response = await api.post('/friend-requests/', {
+        to_user: userId
+      });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
+  requests: async () => {
+    try {
+      const response = await api.get('/friend-requests/');
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
+  acceptFreindRequest: async (requestId) => {
+    try {
+      const response = await api.post(`/friend-requests/${requestId}/accept/`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
+  rejectFriendRequest: async (requestId) => {
+    try {
+      const response = await api.post(`/friend-requests/${requestId}/reject/`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+}
+
 export default api;

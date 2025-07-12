@@ -6,11 +6,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Stores logged-in user
   const [loading, setLoading] = useState(true); // Initial loading state
+  const [token, setToken] = useState(() => localStorage.getItem("authToken"));
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
+      const authToken = localStorage.getItem("authToken");
+      if (!authToken) {
         setLoading(false);
         return;
       }
@@ -31,7 +32,14 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchUser();
-  }, []);
+  }, [token]);
+
+  const login = async (username, password) => {
+    const { access, refresh } = await authService.login(username, password);
+    localStorage.setItem("authToken", access);
+    localStorage.setItem("refreshToken", refresh);
+    setToken(access);       // triggers the above effect (with delay)
+  };
 
   const logout = () => {
     authService.logout(); // Clears localStorage
@@ -39,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, logout, login }}>
       {children}
     </AuthContext.Provider>
   );

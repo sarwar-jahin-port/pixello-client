@@ -90,13 +90,13 @@ const PostCard = ({ post, onEdit, onDelete }) => {
     })();
   }, [post.user.id, post.id]);
 
-  useEffect(()=>{
+  useEffect(() => {
     (async () => {
-      const existingComments = await postService.postCommentByID(post.id)
-      setComments(existingComments); 
+      const existingComments = await postService.postCommentByID(post.id);
+      setComments(existingComments);
     })();
-  },[post.user.id, post.id])
-  console.log(comments);
+  }, [post.user.id, post.id]);
+  // console.log(comments);
 
   const handleLike = async () => {
     // 1) Check current like status
@@ -220,7 +220,7 @@ const PostCard = ({ post, onEdit, onDelete }) => {
     const match = url.match(regExp);
     return match ? match[1] : null;
   };
-  console.log(user);
+  // console.log(user);
   return (
     <Card
       component={motion.div}
@@ -434,79 +434,83 @@ const PostCard = ({ post, onEdit, onDelete }) => {
           </Box>
 
           <List sx={{ maxHeight: 300, overflow: "auto" }}>
-            {comments && comments.map((comment) => (
-              <CommentItem key={comment.id}>
-                <ListItemAvatar>
-                  <Avatar src={comment.user.avatar} alt={comment.user.name} />
-                </ListItemAvatar>
-                {editingCommentId === comment.id ? (
-                  <Box sx={{ flexGrow: 1, display: "flex", gap: 1 }}>
-                    <TextField
-                      fullWidth
-                      size="small"
-                      value={editCommentText}
-                      onChange={(e) => setEditCommentText(e.target.value)}
-                      autoFocus
-                    />
-                    <Button
-                      variant="contained"
-                      size="small"
-                      onClick={() => handleSaveComment(comment.id)}
-                    >
-                      Save
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={() => setEditingCommentId(null)}
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                ) : (
-                  <>
-                    <ListItemText
-                      primary={
-                        <Typography variant="subtitle2\" component="span">
-                          {comment.user.name}
-                        </Typography>
-                      }
-                      secondary={
-                        <>
-                          <Typography
-                            variant="body2"
-                            color="text.primary"
-                            sx={{ mt: 0.5 }}
-                          >
+            {comments &&
+              comments.map((comment) => (
+                <CommentItem key={comment.id}>
+                  <ListItemAvatar>
+                    <Avatar src={comment.user.avatar} alt={comment.user.name} />
+                  </ListItemAvatar>
+                  {editingCommentId === comment.id ? (
+                    <Box sx={{ flexGrow: 1, display: "flex", gap: 1 }}>
+                      <TextField
+                        fullWidth
+                        size="small"
+                        value={editCommentText}
+                        onChange={(e) => setEditCommentText(e.target.value)}
+                        autoFocus
+                      />
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleSaveComment(comment.id)}
+                      >
+                        Save
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => setEditingCommentId(null)}
+                      >
+                        Cancel
+                      </Button>
+                    </Box>
+                  ) : (
+                    <>
+                      <ListItemText
+                        primary={comment.user.name}
+                        primaryTypographyProps={{
+                          variant: "subtitle2",
+                          component: "span", // avoid rendering a <p>
+                        }}
+                        secondary={
+                          <>
                             {comment.text}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {comment.timestamp}
-                          </Typography>
-                        </>
-                      }
-                    />
-                    {comment.user.id === user?.id && (
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          size="small"
-                          onClick={() => handleEditComment(comment)}
-                        >
-                          <EditIcon size={16} />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={() => handleDeleteComment(comment.id)}
-                          sx={{ color: "error.main" }}
-                        >
-                          <TrashIcon size={16} />
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    )}
-                  </>
-                )}
-              </CommentItem>
-            ))}
+                            <br />
+                            <Typography
+                              variant="caption"
+                              component="span" // render as <span> inside the <p>
+                              color="text.secondary"
+                            >
+                              {comment.timestamp}
+                            </Typography>
+                          </>
+                        }
+                        secondaryTypographyProps={{
+                          component: "div", // use <div> instead of <p> wrapper
+                          sx: { mt: 0.5, color: "text.primary" },
+                        }}
+                      />
+                      {comment.user.id === user?.id && (
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleEditComment(comment)}
+                          >
+                            <EditIcon size={16} />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleDeleteComment(comment.id)}
+                            sx={{ color: "error.main" }}
+                          >
+                            <TrashIcon size={16} />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      )}
+                    </>
+                  )}
+                </CommentItem>
+              ))}
           </List>
         </Box>
       </Collapse>

@@ -32,6 +32,7 @@ import {
 import { paymentService } from "../services/api";
 import { AuthContext } from "../contexts/AuthContext";
 import { useNavigate } from "react-router";
+import LoadingScreen from "../components/LoadingScreen";
 
 const PricingCard = styled(Card)(({ theme, featured }) => ({
   position: "relative",
@@ -265,7 +266,7 @@ const Pricing = () => {
     }
   };
 
-  if (loading) return <div>Loading plans</div>;
+  if (loading) return <div className="h-screen translate-y-1/2"><LoadingScreen/></div>
 
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -311,10 +312,10 @@ const Pricing = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <PricingCard featured={plan.featured}>
+              <PricingCard featured={plan.featured} sx={{overflow: "visible"}}>
                 {plan.featured && (
-                  <FeaturedBadge>
-                    <StarIcon size={14} />
+                  <FeaturedBadge sx={{zIndex: 100}}>
+                    <StarIcon size={14}/>
                     Most Popular
                   </FeaturedBadge>
                 )}
