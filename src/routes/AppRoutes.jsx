@@ -12,6 +12,7 @@ import Pricing from '../pages/Pricing'
 import Profile from '../pages/Profile'
 import Connections from '../pages/Connections'
 import AboutUs from '../pages/Aboutus'
+import CommingSoon from "../pages/CommingSoon"
 
 const AppRoutes = () => {
   return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/connections" element={<Connections />} />
+        <Route path="/comming-soon" element={<CommingSoon/>}/>
       </Route>
     </Routes>
   )

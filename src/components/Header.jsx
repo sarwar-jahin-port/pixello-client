@@ -311,19 +311,19 @@ const Header = () => {
           </ListItemIcon>
           <ListItemText primary="My Network" />
         </ListItem>
-        {/* <ListItem button>
+        <ListItem button component={Link} to="/comming-soon">
           <ListItemIcon>
             <BriefcaseIcon size={20} />
           </ListItemIcon>
           <ListItemText primary="Jobs" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/comming-soon">
           <ListItemIcon>
             <MessageIcon size={20} />
           </ListItemIcon>
           <ListItemText primary="Messaging" />
         </ListItem>
-        <ListItem button>
+        {/* <ListItem button>
           <ListItemIcon>
             <BellIcon size={20} />
           </ListItemIcon>
@@ -418,10 +418,10 @@ const Header = () => {
                   <NavButton aria-label="my network" component={Link} to="/connections" active={location.pathname === '/connections' ? 1 : 0}>
                     <UsersIcon size={24} />
                   </NavButton>
-                  <NavButton aria-label="jobs">
+                  <NavButton aria-label="jobs" component={Link} to="/comming-soon">
                     <BriefcaseIcon size={24} />
                   </NavButton>
-                  <NavButton aria-label="messages">
+                  <NavButton aria-label="messages" component={Link} to="/comming-soon">
                     <MessageIcon size={24} />
                   </NavButton>
                   {/* <NavButton

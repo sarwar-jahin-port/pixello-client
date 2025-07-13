@@ -139,14 +139,10 @@ const Dashboard = () => {
 
           <Box
             sx={{
-              position: "fixed",
+              position: "sticky",
               top: {
                 xs: 56,
                 md: 63
-              },
-              width: {
-                xs: "382px",
-                md: "566px"
               },
               zIndex: 1,
               mb: 2,
@@ -160,7 +156,7 @@ const Dashboard = () => {
             />
           </Box>
 
-          <Box sx={{mt: 24}}>
+          <Box>
             {postsloading
               ? Array.from({ length: 3 }).map((_, i) => (
                   <Box key={i} mb={2}>

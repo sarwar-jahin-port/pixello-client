@@ -326,6 +326,14 @@ export const connectionService = {
     } catch (error) {
       return error;
     }
+  },
+  deleteFriendRequest: async (requestId) => {
+    try {
+      const response = await api.delete(`/friend-requests/${requestId}/`)
+      return response.data;
+    } catch (error) {
+      return error
+    }
   }
 }
 

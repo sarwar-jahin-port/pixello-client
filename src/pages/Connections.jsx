@@ -164,8 +164,7 @@ const Connections = () => {
   const [sent, setSent] = useState([]);
   const [connections, setConnections] = useState([]);
 
-  useEffect(() => {
-    const fetchConnectionRequests = async () => {
+  const fetchConnectionRequests = async () => {
       console.log("fetchconnectionrequests invoked");
       try {
         const response = await connectionService.requests();
@@ -178,6 +177,7 @@ const Connections = () => {
         setConnections(connections);
       } catch (error) {}
     };
+  useEffect(() => {
     fetchConnectionRequests();
   }, [user]);
 
@@ -286,6 +286,7 @@ const Connections = () => {
     try {
       const response = await connectionService.acceptFreindRequest(requestId);
       console.log(response);
+      fetchConnectionRequests()
     } catch (error) {
       console.log(error);
     }
@@ -318,7 +319,14 @@ const Connections = () => {
     }
   };
 
-  const handleRejectRequest = (requestId) => {
+  const handleRejectRequest = async(requestId) => {
+    try {
+      const response = await connectionService.rejectFriendRequest(requestId);
+      console.log(response);
+      fetchConnectionRequests()
+    } catch (error) {
+      console.log(error);
+    }
     const request = connectionRequests.find((req) => req.id === requestId);
     setConnectionRequests((prev) => prev.filter((req) => req.id !== requestId));
 
@@ -359,7 +367,15 @@ const Connections = () => {
     }
   };
 
-  const handleRemoveConnection = (connectionId) => {
+  const handleRemoveConnection = async(connectionId) => {
+    try {
+      const response = await connectionService.deleteFriendRequest(connectionId);
+      console.log(response);
+      fetchConnectionRequests();
+    } catch (error) {
+      console.log(error);
+    }
+
     const connection = myConnections.find((conn) => conn.id === connectionId);
     setMyConnections((prev) => prev.filter((conn) => conn.id !== connectionId));
 
@@ -787,7 +803,7 @@ const Connections = () => {
               </Box>
             ) : (
               <Box sx={{ textAlign: "center", py: 6 }}>
-                <SendIcon size={48} color={theme.palette.text.secondary} />
+                <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}}><SendIcon size={48} color={theme.palette.text.secondary} /></Box>
                 <Typography variant="h6" color="text.secondary" sx={{ mt: 2 }}>
                   No sent requests
                 </Typography>
